@@ -16,8 +16,9 @@ BEGIN
     DBMS_OUTPUT.put_line ('Genre: ' || track_genre);
     DBMS_OUTPUT.put_line ('Album Name: ' || album);
     DBMS_OUTPUT.put_line ('Artist Name: ' || artist);
-    Exception
-     When others then
-    DBMS_OUTPUT.put_line ('Error: ' || sqlerrm);   
+    
+    EXCEPTION
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.put_line ('Error: ' || sqlerrm);   
     END;
 /
