@@ -1,35 +1,23 @@
 DECLARE
-    user_id INTEGER;
-    v_ename emp.ename%TYPE;
-    v_job emp.job%TYPE;
-    n_mgr emp.mgr%TYPE;
-    n_sal emp.sal%TYPE;
-    d_hiredate emp.hiredate%TYPE;
-    n_deptno emp.deptno%TYPE;
+    track INTEGER;
+    track_n Track.track_name%TYPE;
+    track_genre Track.genre%TYPE;
+    album Album.album_name%TYPE;
+    artist Artist.artist_name%TYPE;
+    
 BEGIN
-SELECT ename,
-job,
-mgr,
-hiredate,
-sal,
-deptno
-INTO v_ename,
-v_job,
-n_mgr,
-d_hiredate,
-n_sal,
-n_deptno
-FROM emp
-WHERE empno = n_empno;
+    track:=:track;
+    SELECT track_name, genre, album_name, artist_name
+    INTO track_n, track_genre, album, artist
+    FROM Track
+    WHERE track_id = track;
 
-DBMS_OUTPUT.put_line ('Employee Name: ' || v_ename);
-DBMS_OUTPUT.put_line ('Job: ' || v_job);
-DBMS_OUTPUT.put_line ('Manager: ' || n_mgr);
-DBMS_OUTPUT.put_line ('Hiredate: ' || d_hiredate);
-DBMS_OUTPUT.put_line ('Salary: ' || n_sal);
-DBMS_OUTPUT.put_line ('Department: ' || n_deptno);
-Exception
- When others then
-DBMS_OUTPUT.put_line ('Error: ' || sqlerrm);   
-END;
+    DBMS_OUTPUT.put_line ('Name of the Song: ' || track_n);
+    DBMS_OUTPUT.put_line ('Genre: ' || track_genre);
+    DBMS_OUTPUT.put_line ('Album Name: ' || album);
+    DBMS_OUTPUT.put_line ('Artist Name: ' || artist);
+    Exception
+     When others then
+    DBMS_OUTPUT.put_line ('Error: ' || sqlerrm);   
+    END;
 /
